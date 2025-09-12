@@ -4,6 +4,7 @@ import { isRouteErrorResponse } from "react-router";
 import NotFound from "#/components/errors/404";
 import InternalError from "#/components/errors/500";
 import type { Route } from "./+types/root";
+import { Navbar } from "#/components/navbar";
 
 export const links: Route.LinksFunction = () => [
 	{
@@ -23,6 +24,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Links />
 			</head>
 			<body suppressHydrationWarning={true}>
+				<Navbar />
 				{children}
 				<ScrollRestoration />
 				<Scripts />
