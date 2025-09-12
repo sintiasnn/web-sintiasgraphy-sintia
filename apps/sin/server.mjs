@@ -6,19 +6,27 @@ import consola from "consola";
 import express from "express";
 import rateLimit from "express-rate-limit";
 import morgan from "morgan";
-import { resolve } from "node:path";
-import { env, isDevelopment } from "std-env";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { config as loadEnv } from "dotenv";
+
+// Ensure .env from the app directory is loaded regardless of where the command is run
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+loadEnv({ path: resolve(__dirname, ".env") });
+// Optional fallback: also try repo root .env without overriding existing values
+loadEnv({ path: resolve(__dirname, "../../.env"), override: false });
 
 // Short-circuit the type-checking of the built output.
 const BUILD_PATH = resolve("build/server/index.js");
-const PORT = Number.parseInt(env.PORT || "3000");
+const PORT = Number.parseInt(process.env.PORT || "3000");
 
 const app = express();
 
 app.use(compression({ level: 6, threshold: 0 }));
 app.disable("x-powered-by");
 
-if (env.ENABLE_RATE_LIMIT === "true") {
+if (process.env.ENABLE_RATE_LIMIT === "true") {
 	app.use(
 		rateLimit({
 			windowMs: 60 * 1000 * 15, // 15 minutes
@@ -27,7 +35,7 @@ if (env.ENABLE_RATE_LIMIT === "true") {
 	);
 }
 
-if (isDevelopment) {
+if (process.env.NODE_ENV !== "production") {
 	consola.withTag("server").log("Starting development server");
 	const viteDevServer = await import("vite").then((vite) =>
 		vite.createServer({

@@ -77,6 +77,9 @@ importers:
       lucide-react:
         specifier: ^0.543.0
         version: 0.543.0(react@19.1.1)
+      medium-article-api:
+        specifier: ^1.0.4
+        version: 1.0.4
       morgan:
         specifier: ^1.10.1
         version: 1.10.1
@@ -2140,6 +2143,9 @@ packages:
   media-typer@1.1.0:
     resolution: {integrity: sha512-aisnrDP4GNe06UcKFnV5bfMNPBUw4jsLGaWwWfnH3v02GnBuXX2MCVn5RbrWo0j3pczUilYblq7fQ7Nw2t5XKw==}
     engines: {node: '>= 0.8'}
+
+  medium-article-api@1.0.4:
+    resolution: {integrity: sha512-lF0E5EK9n4xVfbngsqJPI0KPo2IlLEoT+zOdFLPbfprGOuAGBokS5GdOGQ7WLDVWjVsBfIRk1M3nMry/B3ypQw==}
 
   memoize-one@6.0.0:
     resolution: {integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==}
@@ -4874,6 +4880,8 @@ snapshots:
   math-intrinsics@1.1.0: {}
 
   media-typer@1.1.0: {}
+
+  medium-article-api@1.0.4: {}
 
   memoize-one@6.0.0: {}
 

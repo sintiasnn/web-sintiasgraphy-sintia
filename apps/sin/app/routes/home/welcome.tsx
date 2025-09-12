@@ -14,9 +14,9 @@ export function Welcome() {
           <h2 className="font-medium">Photos</h2>
           <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">A growing gallery with a simple lightbox.</p>
         </a>
-        <a href="/books" className="rounded border p-4 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/40">
-          <h2 className="font-medium">Books</h2>
-          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Recent reads from Goodreads RSS.</p>
+        <a href="/projects" className="rounded border p-4 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/40">
+          <h2 className="font-medium">Projects</h2>
+          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Selected work and small experiments.</p>
         </a>
       </section>
     </main>

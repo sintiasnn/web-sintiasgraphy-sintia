@@ -5,6 +5,7 @@ import NotFound from "#/components/errors/404";
 import InternalError from "#/components/errors/500";
 import type { Route } from "./+types/root";
 import { Navbar } from "#/components/navbar";
+import { Footer } from "#/components/footer";
 
 export const links: Route.LinksFunction = () => [
 	{
@@ -23,12 +24,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Meta />
 				<Links />
 			</head>
-			<body suppressHydrationWarning={true}>
-				<Navbar />
-				{children}
-				<ScrollRestoration />
-				<Scripts />
-			</body>
+            <body suppressHydrationWarning={true}>
+                <Navbar />
+                <div className="mx-auto max-w-5xl px-4">
+                    {children}
+                    <Footer />
+                </div>
+                <ScrollRestoration />
+                <Scripts />
+            </body>
 		</html>
 	);
 }
