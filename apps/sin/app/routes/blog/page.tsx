@@ -5,7 +5,7 @@ import { useNavigation, useSearchParams } from "react-router";
 
 export function meta(_props: Route.MetaArgs) {
   return [
-    { title: "Blog – sintiasgraphy" },
+    { title: "Blog – sinsin" },
     { name: "description", content: "Posts and notes" },
   ];
 }

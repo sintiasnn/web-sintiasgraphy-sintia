@@ -5,7 +5,7 @@ type Photo = { src: string; alt?: string; caption?: string; w?: number; h?: numb
 
 export function meta(_props: Route.MetaArgs) {
 	return [
-		{ title: "Photos – sintiasgraphy" },
+		{ title: "Photos – sinsin" },
 		{ name: "description", content: "Photo gallery" },
 	];
 }

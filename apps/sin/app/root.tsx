@@ -24,10 +24,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<Meta />
 				<Links />
 			</head>
-            <body suppressHydrationWarning={true}>
-                <a href="#content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:text-black dark:focus:bg-gray-800 dark:focus:text-white">Skip to content</a>
+            <body suppressHydrationWarning={true} className="min-h-dvh flex flex-col">
                 <Navbar />
-                <main id="content" role="main" className="mx-auto max-w-5xl px-4">
+                <main id="content" role="main" className="flex-1">
                     {children}
                 </main>
                 <Footer />

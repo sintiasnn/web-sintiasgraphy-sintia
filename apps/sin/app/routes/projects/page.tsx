@@ -1,4 +1,7 @@
 import type { Route } from "./+types/page";
+import { useEffect, useState } from "react";
+import { Link } from "#/components/link";
+import { useSearchParams, useNavigation } from "react-router";
 
 type Project = {
   title: string;
@@ -11,36 +14,75 @@ type Project = {
 
 export function meta(_props: Route.MetaArgs) {
   return [
-    { title: "Projects – sintiasgraphy" },
+    { title: "Projects – sinsin" },
     { name: "description", content: "Selected projects and experiments" },
   ];
 }
 
-export async function clientLoader() {
-  const res = await fetch("/projects.json");
-  if (!res.ok) return { items: [] as Project[] };
-  return (await res.json()) as { items: Project[] };
+export async function clientLoader({ request }: Route.ClientLoaderArgs) {
+  try {
+    const url = new URL(request.url);
+    const refresh = url.searchParams.get('refresh');
+    const apiUrl = new URL(`/api/projects${refresh ? '?refresh=1' : ''}`, request.url);
+    const res = await fetch(apiUrl.toString());
+    if (!res.ok) return { items: [] as Project[] };
+    return (await res.json()) as { items: Project[] };
+  } catch {
+    return { items: [] as Project[] };
+  }
 }
 
 export default function ProjectsPage({ loaderData }: Route.ComponentProps) {
   const { items } = (loaderData as { items: Project[] }) ?? { items: [] };
+  const navigation = useNavigation();
+  const isLoading = navigation.state !== "idle";
+  const [params] = useSearchParams();
+  const [showRefreshed, setShowRefreshed] = useState(false);
+  useEffect(() => {
+    if (params.get('refresh') === '1') {
+      setShowRefreshed(true);
+      const t = setTimeout(() => setShowRefreshed(false), 1800);
+      return () => clearTimeout(t);
+    }
+  }, [params]);
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="fluid-title font-semibold tracking-tight">Projects</h1>
-      <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((p) => (
+    <main className="mx-auto max-w-3xl px-4 py-10">
+      {showRefreshed && (
+        <div className="mb-3 rounded border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-800 dark:border-green-900/40 dark:bg-green-900/20 dark:text-green-300">
+          Projects refreshed
+        </div>
+      )}
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <h1 className="text-2xl font-semibold tracking-tight">Projects</h1>
+        <Link href={`/projects?refresh=1`} className="rounded border px-3 py-1 text-sm hover:bg-gray-50 dark:hover:bg-gray-800">Refresh</Link>
+      </div>
+      <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {isLoading
+          ? Array.from({ length: Math.min(items.length || 6, 6) }).map((_, i) => (
+              <li key={`s-${i}`} className="rounded border p-4 dark:border-gray-800">
+                <div className="mb-3 h-40 w-full animate-pulse rounded bg-gray-200 dark:bg-gray-800" />
+                <div className="h-4 w-2/3 animate-pulse rounded bg-gray-200 dark:bg-gray-800" />
+                <div className="mt-2 h-3 w-1/2 animate-pulse rounded bg-gray-200 dark:bg-gray-800" />
+                <div className="mt-2 h-16 w-full animate-pulse rounded bg-gray-200 dark:bg-gray-800" />
+              </li>
+            ))
+          : items.map((p) => (
           <li key={p.title} className="rounded border p-4 dark:border-gray-800">
             {p.image && (
               <img src={p.image} alt="" loading="lazy" className="mb-3 h-40 w-full rounded object-cover" />
             )}
-            <div className="flex items-start justify-between gap-4">
-              <h2 className="font-medium text-lg">{p.title}</h2>
-              {p.updated && (
-                <span className="text-xs text-gray-500 dark:text-gray-400">{new Date(p.updated).toDateString()}</span>
-              )}
-            </div>
+            {p.link ? (
+              <a href={p.link} target="_blank" rel="noopener noreferrer" className="font-medium hover:underline">
+                {p.title}
+              </a>
+            ) : (
+              <span className="font-medium">{p.title}</span>
+            )}
+            {p.updated && (
+              <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">{new Date(p.updated).toDateString()}</p>
+            )}
             {p.description && (
-              <p className="mt-2 text-gray-600 dark:text-gray-300">{p.description}</p>
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-300 line-clamp-3">{p.description}</p>
             )}
             {p.tags && p.tags.length > 0 && (
               <div className="mt-3 flex flex-wrap gap-2">
@@ -56,9 +98,25 @@ export default function ProjectsPage({ loaderData }: Route.ComponentProps) {
                 href={p.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-block text-blue-600 underline dark:text-blue-400"
+                className="mt-3 inline-flex items-center rounded border px-2 py-1 text-xs hover:bg-gray-50 dark:hover:bg-gray-800"
               >
-                View project
+                {p.link.includes('github.com') ? (
+                  <>
+                    <svg
+                      aria-hidden="true"
+                      viewBox="0 0 16 16"
+                      width="14"
+                      height="14"
+                      className="mr-1 inline-block"
+                      fill="currentColor"
+                    >
+                      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                    </svg>
+                    View on GitHub →
+                  </>
+                ) : (
+                  <>View project →</>
+                )}
               </a>
             )}
           </li>

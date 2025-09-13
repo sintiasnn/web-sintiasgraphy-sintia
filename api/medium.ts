@@ -43,7 +43,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       } catch (_err) {
         const r = await fetch(feedUrl, {
           headers: {
-            'User-Agent': 'sintiasgraphy/1.0',
+            'User-Agent': 'sinsin/1.0',
             Accept: 'application/rss+xml, application/xml;q=0.9, */*;q=0.8',
           },
         })
@@ -86,4 +86,3 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json({ items: [] })
   }
 }
-
