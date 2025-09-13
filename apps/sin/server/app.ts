@@ -61,6 +61,21 @@ app.get("/api/experience", async (_req: Request, res: Response) => {
     }
 });
 
+// Serve community involvement list from public
+app.get("/api/community", async (_req: Request, res: Response) => {
+    try {
+        const here = fileURLToPath(import.meta.url);
+        const base = resolvePath(here, "../");
+        const p = resolvePath(base, "../public/community.json");
+        const raw = await readFile(p, "utf8");
+        res.setHeader("Content-Type", "application/json");
+        return res.send(raw);
+    } catch (e) {
+        if (process.env.NODE_ENV !== "production") console.error("/api/community error:", e);
+        return res.json({ items: [] });
+    }
+});
+
 // GitHub projects proxy (lists user repos)
 type GhRepo = {
     name: string;
