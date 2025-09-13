@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "title": "Personal Site Revamp",
+      "description": "Revamping my personal website with React Router, Tailwind, and a clean content structure.",
+      "link": "https://github.com/sintiasnn/web-sintiasgraphy-sintia",
+      "tags": ["web", "react", "tailwind"],
+      "image": "/images/photos/picture-1.png",
+      "updated": "2025-09-12T00:00:00.000Z"
+    },
+    {
+      "title": "Simple Photos Gallery",
+      "description": "Lightweight photo gallery with lazy-load and lightbox.",
+      "tags": ["frontend", "photos"],
+      "image": "/images/photos/picture-2.png",
+      "updated": "2025-08-20T00:00:00.000Z"
+    }
+  ]
+}
+
