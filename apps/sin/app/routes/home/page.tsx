@@ -34,14 +34,14 @@ export default function Page({ loaderData }: Route.ComponentProps) {
     <>
       <Welcome />
       {items && items.length > 0 && (
-        <section id="experience" className="mx-auto max-w-3xl px-4 mt-16 pb-10">
+        <section id="experience" className="mx-auto max-w-4xl px-4 min-h-[calc(100dvh-56px)] flex flex-col justify-center py-10">
           <h2 className="text-lg font-semibold tracking-tight">Experience</h2>
-          <ul className="mt-4 space-y-4">
+          <ul className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 mx-auto max-w-4xl">
             {items.map((ex, idx) => {
               const start = ex.start || '';
               const end = ex.end || 'Present';
               return (
-                <li key={idx} className="rounded border p-4 dark:border-gray-800">
+                <li key={idx} className="rounded border p-3 sm:p-4 h-full dark:border-gray-800">
                   <div className="flex items-baseline justify-between gap-3">
                     <div>
                       <div className="font-medium">

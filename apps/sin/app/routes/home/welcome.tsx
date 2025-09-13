@@ -9,14 +9,18 @@ export function Welcome() {
         </p>
       </header>
 
-      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <a href="/photos" className="rounded border p-4 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/40">
+      <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 justify-items-stretch auto-rows-fr">
+        <a href="/photos" className="block h-full rounded border p-4 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/40">
           <h2 className="font-medium">Photos</h2>
           <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">A growing gallery with a simple lightbox.</p>
         </a>
-        <a href="/projects" className="rounded border p-4 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/40">
+        <a href="/projects" className="block h-full rounded border p-4 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/40">
           <h2 className="font-medium">Projects</h2>
           <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Selected work and small experiments.</p>
+        </a>
+        <a href="/blog" className="block h-full rounded border p-4 hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-800/40">
+          <h2 className="font-medium">Blog</h2>
+          <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">Notes, updates, and longer posts.</p>
         </a>
       </section>
     </section>
