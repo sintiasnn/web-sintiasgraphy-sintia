@@ -21,6 +21,25 @@ export function Navbar() {
     setOpen(false);
   }, [location.pathname]);
 
+  // Theme toggle (light/dark)
+  const [theme, setTheme] = React.useState<"light" | "dark">("light");
+  React.useEffect(() => {
+    // sync initial from document attribute
+    if (typeof document !== "undefined") {
+      setTheme(document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light");
+    }
+  }, []);
+  const toggleTheme = React.useCallback(() => {
+    const next = theme === "dark" ? "light" : "dark";
+    setTheme(next);
+    if (typeof document !== "undefined") {
+      const root = document.documentElement;
+      if (next === "dark") root.setAttribute("data-theme", "dark");
+      else root.removeAttribute("data-theme");
+    }
+    try { localStorage.setItem("theme", next); } catch {}
+  }, [theme]);
+
   return (
     <nav className="sticky top-0 z-20 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:bg-gray-900/70">
       <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-6 px-4">
@@ -41,8 +60,46 @@ export function Navbar() {
               </Link>
             );
           })}
+          {/* Theme toggle (desktop) */}
+          <button
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className="inline-flex items-center justify-center rounded border px-2 py-1 text-gray-700 hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-800"
+            title={theme === "dark" ? "Light" : "Dark"}
+          >
+            {theme === "dark" ? (
+              // Sun icon
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+              </svg>
+            ) : (
+              // Moon icon
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+            )}
+          </button>
         </div>
-        {/* Mobile toggle */}
+        {/* Theme toggle (mobile) */}
+        <button
+          onClick={toggleTheme}
+          aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+          className="inline-flex items-center justify-center rounded border p-2 text-gray-700 lg:hidden dark:border-gray-800 dark:text-gray-300"
+          title={theme === "dark" ? "Light" : "Dark"}
+        >
+          {theme === "dark" ? (
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          )}
+        </button>
+        {/* Mobile menu toggle */}
         <button
           className="inline-flex items-center justify-center rounded border p-2 text-gray-700 lg:hidden dark:border-gray-800 dark:text-gray-300"
           aria-controls="mobile-nav"

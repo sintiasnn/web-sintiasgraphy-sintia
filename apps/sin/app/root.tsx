@@ -21,6 +21,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
+                {/* Initialize theme early to avoid flash */}
+                <script
+                    // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted inline script for theme init
+                    dangerouslySetInnerHTML={{
+                        __html:
+                            "(() => { try { const t = localStorage.getItem('theme'); const m = window.matchMedia('(prefers-color-scheme: dark)').matches; const isDark = t ? t === 'dark' : m; const root = document.documentElement; if (isDark) root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); } catch(_) {} })();",
+                    }}
+                />
 				<Meta />
 				<Links />
 			</head>
