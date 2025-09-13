@@ -1,0 +1,6 @@
+{
+  "buildCommand": "pnpm install --frozen-lockfile && pnpm -C apps/sin build",
+  "outputDirectory": "apps/sin/build/client",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
+

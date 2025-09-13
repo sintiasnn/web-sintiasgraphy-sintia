@@ -3,12 +3,11 @@ import { useLocation } from "react-router";
 import * as React from "react";
 
 const nav = [
-	{ name: "Home", href: "/" },
-	{ name: "About", href: "/about" },
-	{ name: "Blog", href: "/blog" },
-	{ name: "Photos", href: "/photos" },
+  { name: "Home", href: "/" },
   { name: "Projects", href: "/projects" },
-	{ name: "Contact", href: "/contact" },
+  { name: "Blog", href: "/blog" },
+  { name: "Photos", href: "/photos" },
+  { name: "About", href: "/about" },
 ];
 
 export function Navbar() {
