@@ -25,9 +25,9 @@ export async function clientLoader() {
 export default function ProjectsPage({ loaderData }: Route.ComponentProps) {
   const { items } = (loaderData as { items: Project[] }) ?? { items: [] };
   return (
-    <main className="mx-auto max-w-5xl px-4 py-10">
-      <h1 className="text-2xl font-semibold tracking-tight">Projects</h1>
-      <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+    <main className="mx-auto max-w-6xl px-4 py-10">
+      <h1 className="fluid-title font-semibold tracking-tight">Projects</h1>
+      <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((p) => (
           <li key={p.title} className="rounded border p-4 dark:border-gray-800">
             {p.image && (

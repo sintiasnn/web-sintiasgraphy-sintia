@@ -1,5 +1,7 @@
 import type { Route } from "./+types/page";
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "#/components/link";
+import { useNavigation, useSearchParams } from "react-router";
 
 export function meta(_props: Route.MetaArgs) {
   return [
@@ -10,43 +12,59 @@ export function meta(_props: Route.MetaArgs) {
 
 type MediumItem = { title: string; link: string; pubDate?: string; image?: string; snippet?: string };
 
-export async function clientLoader() {
-  async function fetchPage(q: string) {
-    try {
-      const r = await fetch(`/api/medium${q}`);
-      if (!r.ok) return { items: [] as MediumItem[] };
-      return (await r.json()) as { items: MediumItem[] };
-    } catch {
-      return { items: [] as MediumItem[] };
-    }
+export async function clientLoader({ request }: Route.ClientLoaderArgs) {
+  const url = new URL(request.url);
+  const page = url.searchParams.get('page') ?? '1';
+  const limit = url.searchParams.get('limit') ?? '12';
+  try {
+    const r = await fetch(`/api/medium?limit=${encodeURIComponent(limit)}&page=${encodeURIComponent(page)}`);
+    if (!r.ok) return { items: [] as MediumItem[] };
+    return (await r.json()) as { items: MediumItem[]; total?: number; page?: number; pageCount?: number; limit?: number };
+  } catch {
+    return { items: [] as MediumItem[] };
   }
-
-  // Probe a few combinations, including the one you tested manually
-  const queries = [
-    "?limit=6&page=1",
-    "?limit=6&page=2",
-    "?limit=6&page=3",
-    "?limit=12&page=1",
-    "?limit=12&page=2",
-    "", // no pagination
-  ];
-
-  for (const q of queries) {
-    const data = await fetchPage(q);
-    if (data.items && data.items.length > 0) return data;
-  }
-  return { items: [] as MediumItem[] };
 }
 
 export default function BlogPage({ loaderData }: Route.ComponentProps) {
-  const { items } = (loaderData as { items: MediumItem[] }) ?? { items: [] };
-  const [visible, setVisible] = useState(6);
-  const list = items.slice(0, Math.max(6, visible));
+  const data = (loaderData as { items: MediumItem[]; total?: number; page?: number; pageCount?: number; limit?: number }) ?? { items: [] };
+  const { items, total, page, pageCount, limit } = data;
+  const hasPrev = ((page ?? 1)) > 1;
+  const hasNext = ((pageCount ?? 1)) > ((page ?? 1));
+  const navigation = useNavigation();
+  const isLoading = navigation.state !== "idle";
+  const [params] = useSearchParams();
+  const currentLimit = Number(params.get('limit') || (limit ?? 12)) || 12;
+  const skeletonCount = Math.min(currentLimit, 12);
+  const [showRefreshed, setShowRefreshed] = useState(false);
+  useEffect(() => {
+    if (params.get('refresh') === '1') {
+      setShowRefreshed(true);
+      const t = setTimeout(() => setShowRefreshed(false), 1800);
+      return () => clearTimeout(t);
+    }
+  }, [params]);
   return (
     <main className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-2xl font-semibold tracking-tight">Blog</h1>
+      {showRefreshed && (
+        <div className="mb-3 rounded border border-green-200 bg-green-50 px-3 py-2 text-sm text-green-800 dark:border-green-900/40 dark:bg-green-900/20 dark:text-green-300">
+          Feed refreshed
+        </div>
+      )}
+      <div className="mb-4 flex items-center justify-between gap-3">
+        <h1 className="text-2xl font-semibold tracking-tight">Blog</h1>
+        <Link href={`/blog?refresh=1&page=${page ?? 1}&limit=${limit ?? 12}`} className="rounded border px-3 py-1 text-sm hover:bg-gray-50 dark:hover:bg-gray-800">Refresh</Link>
+      </div>
       <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {list.map((it) => (
+        {isLoading
+          ? Array.from({ length: skeletonCount }).map((_, i) => (
+              <li key={`s-${i}`} className="rounded border p-4 dark:border-gray-800">
+                <div className="mb-3 h-40 w-full animate-pulse rounded bg-gray-200 dark:bg-gray-800" />
+                <div className="h-4 w-2/3 animate-pulse rounded bg-gray-200 dark:bg-gray-800" />
+                <div className="mt-2 h-3 w-1/2 animate-pulse rounded bg-gray-200 dark:bg-gray-800" />
+                <div className="mt-2 h-16 w-full animate-pulse rounded bg-gray-200 dark:bg-gray-800" />
+              </li>
+            ))
+          : items.map((it) => (
           <li key={it.link} className="rounded border p-4 dark:border-gray-800">
             {it.image && (
               <img src={it.image} alt="" loading="lazy" className="mb-3 h-40 w-full rounded object-cover" />
@@ -73,19 +91,38 @@ export default function BlogPage({ loaderData }: Route.ComponentProps) {
           </li>
         ))}
         {items.length === 0 && (
-          <li className="text-gray-600 dark:text-gray-400">No posts yet.</li>
+          <li className="flex flex-col items-center justify-center gap-3 rounded border p-6 text-gray-600 dark:border-gray-800 dark:text-gray-400">
+            <span>No posts yet.</span>
+            <Link href="/blog?refresh=1" className="rounded border px-3 py-1 text-sm hover:bg-gray-50 dark:hover:bg-gray-800">Retry</Link>
+          </li>
         )}
       </ul>
-      {visible < items.length && (
-        <div className="mt-6 text-center">
-          <button
-            className="rounded border px-4 py-2 text-sm hover:bg-gray-50 dark:hover:bg-gray-800"
-            onClick={() => setVisible((v) => v + 6)}
-          >
-            Load more
-          </button>
+      {(pageCount && pageCount > 1) && (
+        <div className="mt-8 flex items-center justify-between text-sm">
+          {hasPrev ? (
+            <Link href={`/blog?page=${((page ?? 2)) - 1}&limit=${(limit ?? 12)}`} className="rounded border px-3 py-1 hover:bg-gray-50 dark:hover:bg-gray-800">← Newer</Link>
+          ) : <span />}
+          <span className="text-gray-600 dark:text-gray-400">Page {page ?? 1}{total ? ` of ${pageCount}` : ''}</span>
+          {hasNext ? (
+            <Link href={`/blog?page=${((page ?? 1)) + 1}&limit=${(limit ?? 12)}`} className="rounded border px-3 py-1 hover:bg-gray-50 dark:hover:bg-gray-800">Older →</Link>
+          ) : <span />}
         </div>
       )}
     </main>
   );
+}
+
+export async function loader({ request }: Route.LoaderArgs) {
+  try {
+    const reqUrl = new URL(request.url);
+    const page = reqUrl.searchParams.get('page') ?? '1';
+    const limit = reqUrl.searchParams.get('limit') ?? '12';
+    const refresh = reqUrl.searchParams.get('refresh');
+    const apiUrl = new URL(`/api/medium?limit=${encodeURIComponent(limit)}&page=${encodeURIComponent(page)}${refresh ? '&noCache=1' : ''}`, request.url);
+    const r = await fetch(apiUrl.toString());
+    if (!r.ok) return { items: [] as MediumItem[] };
+    return (await r.json()) as { items: MediumItem[]; total?: number; page?: number; pageCount?: number; limit?: number };
+  } catch {
+    return { items: [] as MediumItem[] };
+  }
 }

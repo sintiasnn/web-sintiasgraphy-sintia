@@ -121,3 +121,15 @@
 	border-style: dashed;
 	border-color: #f87171;
 }
+
+/* Responsive typography helpers */
+@layer utilities {
+  .fluid-title {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.2;
+  }
+  .fluid-subtitle {
+    font-size: clamp(1rem, 2.2vw, 1.125rem);
+    line-height: 1.5;
+  }
+}

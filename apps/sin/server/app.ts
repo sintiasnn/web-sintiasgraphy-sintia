@@ -27,6 +27,25 @@ app.all("/.well-known/appspecific/com.chrome.devtools.json", (_req, res) => {
     res.status(204).end();
 });
 
+// Serve photos manifest from public reliably (avoids any dev static quirks)
+import { readFile } from "node:fs/promises";
+import { resolve as resolvePath } from "node:path";
+import { fileURLToPath } from "node:url";
+app.get("/api/photos", async (_req: Request, res: Response) => {
+    try {
+        // Resolve relative to this module's file location to avoid cwd issues
+        const here = fileURLToPath(import.meta.url);
+        const base = resolvePath(here, "../");
+        const p = resolvePath(base, "../public/photos.json");
+        const raw = await readFile(p, "utf8");
+        res.setHeader("Content-Type", "application/json");
+        return res.send(raw);
+    } catch (e) {
+        if (process.env.NODE_ENV !== "production") console.error("/api/photos error:", e);
+        return res.json({ photos: [] });
+    }
+});
+
 // Medium feed to JSON (via medium-article-api with RSS fallback)
 // Env: MEDIUM_USERNAME (e.g. wahyuivan) or MEDIUM_FEED_URL (e.g. https://medium.com/feed/@wahyuivan)
 // Simple in-memory cache for Medium results
@@ -42,6 +61,7 @@ app.get("/api/medium", async (req: Request, res: Response) => {
     // pagination params
     const limitParam = Number.parseInt((req.query.limit as string) || "");
     const pageParam = Number.parseInt((req.query.page as string) || "1");
+    const noCache = (req.query.noCache as string) === "1" || (req.query.refresh as string) === "1";
     const limit = Number.isFinite(limitParam) && limitParam > 0 ? limitParam : undefined;
     const page = Number.isFinite(pageParam) && pageParam > 0 ? pageParam : 1;
 
@@ -52,7 +72,7 @@ app.get("/api/medium", async (req: Request, res: Response) => {
     try {
         let items: Array<{ title: string; link: string; pubDate?: string; image?: string; snippet?: string }>; 
 
-        if (cached && now - cached.at < MEDIUM_CACHE_TTL_MS) {
+        if (!noCache && cached && now - cached.at < MEDIUM_CACHE_TTL_MS) {
             items = cached.items;
         } else {
             // try medium-article-api first
