@@ -1,0 +1,14 @@
+{
+  "photos": [
+    { "src": "/images/photos/picture-1.png", "alt": "Photo 1", "caption": "Picture 1 – Sintia's snap" },
+    { "src": "/images/photos/picture-2.png", "alt": "Photo 2", "caption": "Picture 2 – Sintia's snap" },
+    { "src": "/images/photos/picture-3.png", "alt": "Photo 3", "caption": "Picture 3 – Sintia's snap" },
+    { "src": "/images/photos/picture-4.png", "alt": "Photo 4", "caption": "Picture 4 – Sintia's snap" },
+    { "src": "/images/photos/picture-5.png", "alt": "Photo 5", "caption": "Picture 5 – Sintia's snap" },
+    { "src": "/images/photos/picture-6.png", "alt": "Photo 6", "caption": "Picture 6 – Sintia's snap" },
+    { "src": "/images/photos/picture-7.png", "alt": "Photo 7", "caption": "Picture 7 – Sintia's snap" },
+    { "src": "/images/photos/picture-8.png", "alt": "Photo 8", "caption": "Picture 8 – Sintia's snap" },
+    { "src": "/images/photos/picture-9.png", "alt": "Photo 9", "caption": "Picture 9 – Sintia's snap" },
+    { "src": "/images/photos/picture-10.png", "alt": "Photo 10", "caption": "Picture 10 – Sintia's snap" }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "title": "Speaker",
+      "org": "OpenInfra Indonesia Day 2025",
+      "orgUrl": "https://2025.openinfra.id/",
+      "start": "2025",
+      "end": "2025",
+      "tags": ["Talk", "Sharing"]
+    },
+    {
+      "title": "Mentor",
+      "org": "Satupadu Mentorship Summit",
+      "start": "2025",
+      "end": "2025",
+      "tags": ["Talk", "Sharing"]
+    }
+  ]
+}
+

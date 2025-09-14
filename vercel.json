@@ -1,8 +1,8 @@
 {
-  "buildCommand": "pnpm install --frozen-lockfile && pnpm -C apps/sin build",
-  "outputDirectory": "apps/sin/build/client",
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" },
-    { "source": "/(.*)", "destination": "/index.html" }
+  "builds": [
+    { "src": "apps/sinsin/next.config.mjs", "use": "@vercel/next" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "apps/sinsin/$1" }
   ]
 }
