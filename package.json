@@ -31,14 +31,17 @@
         "npm-check-updates": "catalog:",
         "tsx": "^4.20.5"
     },
-    "pnpm": {
-        "onlyBuiltDependencies": [
-            "@biomejs/biome",
-            "@swc/core",
-            "core-js-pure",
-            "esbuild",
-            "sharp"
-        ]
-    },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@biomejs/biome",
+      "@swc/core",
+      "core-js-pure",
+      "esbuild",
+      "sharp"
+    ],
+    "overrides": {
+      "esbuild": "0.24.2"
+    }
+  },
     "packageManager": "pnpm@10.15.1"
 }

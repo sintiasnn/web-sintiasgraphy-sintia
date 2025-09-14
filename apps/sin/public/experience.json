@@ -1,0 +1,45 @@
+{
+  "items": [
+    {
+      "title": "Infrastructure Engineer",
+      "company": "Zero One Group",
+      "companyUrl": "https://zero-one-group.com",
+      "type": "Full-time",
+      "start": "Oct 2024",
+      "end": null,
+      "stack": ["Docker", "Linux", "AWS", "Gitlab"]
+    },
+    {
+      "title": "Devops Engineer",
+      "company": "PukulEnam",
+      "type": "Freelance",
+      "start": "Jun 2025",
+      "end": null,
+      "stack": ["Docker", "Linux", "AWS", "Gitlab"]
+    },
+    {
+        "title": "Devops Engineer",
+        "company": "Gits Indonesia",
+        "type": "Apprenticeship",
+        "start": "Mar 2024",
+        "end": "Oct 2024",
+        "stack": ["Docker", "Linux", "AWS", "Gitlab"]
+    },
+    {
+        "title": "Cloud Operations and Infra Engineer",
+        "company": "Alterstay",
+        "type": "Full-time",
+        "start": "Jun 2023",
+        "end": "Oct 2024",
+        "stack": ["Docker", "Linux", "AWS", "Gitlab"]
+    },
+    {
+        "title": "Cloud Computing Mentor",
+        "company": "Bangkit Academy led by Google, Tokopedia, Gojek, & Traveloka",
+        "type": "Part-time",
+        "start": "Feb 2023",
+        "end": "Jan 2024",
+        "stack": ["Docker", "Linux", "AWS", "Gitlab"]
+    }
+  ]
+}

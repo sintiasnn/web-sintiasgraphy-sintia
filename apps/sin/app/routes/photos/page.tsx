@@ -5,7 +5,7 @@ type Photo = { src: string; alt?: string; caption?: string; w?: number; h?: numb
 
 export function meta(_props: Route.MetaArgs) {
 	return [
-		{ title: "Photos – sintiasgraphy" },
+		{ title: "Photos – sinsin" },
 		{ name: "description", content: "Photo gallery" },
 	];
 }
@@ -115,7 +115,7 @@ export default function PhotosPage({ loaderData }: Route.ComponentProps) {
           <div className="relative" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd} onClick={(e) => e.stopPropagation()}>
             <button
               ref={closeRef}
-              className="absolute right-2 top-2 rounded bg-white/80 px-2 py-1 text-sm text-gray-900 hover:bg-white focus:outline-none focus:ring-2 focus:ring-white dark:bg-gray-800/80 dark:text-gray-100"
+              className="absolute right-2 top-2 z-10 rounded bg-white/80 px-2 py-1 text-sm text-gray-900 hover:bg-white focus:outline-none focus:ring-2 focus:ring-white dark:bg-gray-800/80 dark:text-gray-100"
               onClick={() => setActiveIndex(null)}
               aria-label="Close"
             >
@@ -136,10 +136,10 @@ export default function PhotosPage({ loaderData }: Route.ComponentProps) {
                 </div>
               )}
             </div>
-            <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-2">
+            <div className="absolute inset-y-0 left-0 right-0 flex items-center justify-between px-2 pointer-events-none">
               <button
                 ref={prevRef}
-                className="rounded bg-white/80 p-2 text-gray-900 hover:bg-white focus:outline-none focus:ring-2 focus:ring-white dark:bg-gray-800/80 dark:text-gray-100"
+                className="pointer-events-auto rounded bg-white/80 p-2 text-gray-900 hover:bg-white focus:outline-none focus:ring-2 focus:ring-white dark:bg-gray-800/80 dark:text-gray-100"
                 onClick={(e) => {
                   e.stopPropagation();
                   setActiveIndex((i) => (i == null ? i : Math.max(i - 1, 0)));
@@ -150,7 +150,7 @@ export default function PhotosPage({ loaderData }: Route.ComponentProps) {
               </button>
               <button
                 ref={nextRef}
-                className="rounded bg-white/80 p-2 text-gray-900 hover:bg-white focus:outline-none focus:ring-2 focus:ring-white dark:bg-gray-800/80 dark:text-gray-100"
+                className="pointer-events-auto rounded bg-white/80 p-2 text-gray-900 hover:bg-white focus:outline-none focus:ring-2 focus:ring-white dark:bg-gray-800/80 dark:text-gray-100"
                 onClick={(e) => {
                   e.stopPropagation();
                   setActiveIndex((i) => (i == null ? i : Math.min(i + 1, photos.length - 1)));

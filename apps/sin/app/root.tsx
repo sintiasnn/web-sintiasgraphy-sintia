@@ -21,13 +21,20 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
+                {/* Initialize theme early to avoid flash */}
+                <script
+                    // biome-ignore lint/security/noDangerouslySetInnerHtml: trusted inline script for theme init
+                    dangerouslySetInnerHTML={{
+                        __html:
+                            "(() => { try { const t = localStorage.getItem('theme'); const m = window.matchMedia('(prefers-color-scheme: dark)').matches; const isDark = t ? t === 'dark' : m; const root = document.documentElement; if (isDark) root.setAttribute('data-theme','dark'); else root.removeAttribute('data-theme'); } catch(_) {} })();",
+                    }}
+                />
 				<Meta />
 				<Links />
 			</head>
-            <body suppressHydrationWarning={true}>
-                <a href="#content" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:text-black dark:focus:bg-gray-800 dark:focus:text-white">Skip to content</a>
+            <body suppressHydrationWarning={true} className="min-h-dvh flex flex-col">
                 <Navbar />
-                <main id="content" role="main" className="mx-auto max-w-5xl px-4">
+                <main id="content" role="main" className="flex-1">
                     {children}
                 </main>
                 <Footer />
