@@ -1,18 +1,18 @@
 {
   "items": [
     {
-      "title": "Contoh: Organizer",
-      "org": "Contoh: Local Dev Meetup",
-      "orgUrl": "https://example.com",
-      "start": "2023",
-      "end": null,
-      "tags": ["Meetup", "Community", "Volunteer"]
+      "title": "Speaker",
+      "org": "OpenInfra Indonesia Day 2025",
+      "orgUrl": "https://2025.openinfra.id/",
+      "start": "2025",
+      "end": "2025",
+      "tags": ["Talk", "Sharing"]
     },
     {
-      "title": "Contoh: Speaker",
-      "org": "Contoh: Campus Tech Talk",
-      "start": "2022",
-      "end": "2023",
+      "title": "Mentor",
+      "org": "Satupadu Mentorship Summit",
+      "start": "2025",
+      "end": "2025",
       "tags": ["Talk", "Sharing"]
     }
   ]
