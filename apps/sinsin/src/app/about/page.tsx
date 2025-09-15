@@ -21,19 +21,19 @@ export default function AboutPage() {
 		<main className="mx-auto max-w-5xl px-4 py-10">
 			<h1 className="text-2xl font-semibold tracking-tight">About</h1>
 			<p
-				className="mt-4 leading-relaxed text-gray-700 dark:text-gray-300"
+				className="mt-6 leading-relaxed text-gray-700 dark:text-gray-300"
 				style={{ textAlign: "justify" }}
 			>
-				Hi! I’m Ni Putu Sintia Wati, an Infrastructure Engineer with over a year
-				of experience in cloud infrastructure, automation, and observability. I
-				focus on building scalable systems, optimizing developer workflows, and
-				ensuring reliability through Infrastructure as Code, monitoring, and
-				CI/CD. Beyond work, I enjoy improving old projects, reading, writing
-				blogs based on my experiences, and capturing everyday moments through
-				simple photography. This site is where I share my projects, thoughts,
-				and snapshots. I’m committed to deepening my expertise in cloud
-				infrastructure and observability, while continuing to explore new
-				technologies.
+				Hi! I’m Ni Putu Sintia Wati, A.K.A sintia or sinsin. an Infrastructure
+				Engineer with over a year of experience in cloud infrastructure,
+				automation, and observability. I focus on building scalable systems,
+				optimizing developer workflows, and ensuring reliability through
+				Infrastructure as Code, monitoring, and CI/CD. Beyond work, I enjoy
+				improving old projects, reading, writing blogs based on my experiences,
+				and capturing everyday moments through simple photography. This site is
+				where I share my projects, thoughts, and snapshots. I’m committed to
+				deepening my expertise in cloud infrastructure and observability, while
+				continuing to explore new technologies.
 			</p>
 
 			{/* Blurb above the links */}
