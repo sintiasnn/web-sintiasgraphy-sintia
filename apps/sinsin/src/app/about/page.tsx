@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from "#/app/link"
 
 export const metadata: Metadata = {
   title: 'About – sinsin',
@@ -14,7 +15,11 @@ export default function AboutPage() {
         simple snaps in my spare time. This site is a home for notes, photos,
         and the books I’m reading.
       </p>
+      <div className="mt-10">
+        <Link href="/" className="rounded border px-3 py-1 text-sm hover:bg-gray-50 dark:hover:bg-gray-800">
+          ← Back to Home
+        </Link>
+      </div>
     </main>
   )
 }
-
