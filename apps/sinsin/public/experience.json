@@ -15,7 +15,7 @@
       "type": "Freelance",
       "start": "Jun 2025",
       "end": null,
-      "stack": ["Docker", "Linux", "AWS", "Gitlab"]
+      "stack": ["Docker", "Linux", "AWS", "Github","GCP"]
     },
     {
         "title": "Devops Engineer",
@@ -23,7 +23,7 @@
         "type": "Apprenticeship",
         "start": "Mar 2024",
         "end": "Oct 2024",
-        "stack": ["Docker", "Linux", "AWS", "Gitlab"]
+        "stack": ["Docker", "Linux", "GCP", "Gitlab"]
     },
     {
         "title": "Cloud Operations and Infra Engineer",
@@ -31,7 +31,7 @@
         "type": "Full-time",
         "start": "Jun 2023",
         "end": "Oct 2024",
-        "stack": ["Docker", "Linux", "AWS", "Gitlab"]
+        "stack": ["Docker", "Linux", "GCP", "Gitlab"]
     },
     {
         "title": "Cloud Computing Mentor",
@@ -39,7 +39,7 @@
         "type": "Part-time",
         "start": "Feb 2023",
         "end": "Jan 2024",
-        "stack": ["Docker", "Linux", "AWS", "Gitlab"]
+        "stack": ["GCP"]
     }
   ]
 }

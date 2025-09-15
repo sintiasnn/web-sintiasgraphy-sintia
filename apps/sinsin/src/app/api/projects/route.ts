@@ -68,7 +68,7 @@ export async function GET(req: NextRequest) {
       items = filtered.map((repo) => {
         const title = repo.name
         const description = repo.description ?? undefined
-        const link = (repo.homepage && repo.homepage.trim()) || repo.html_url
+        const link = repo.html_url
         const stack = [
           ...(repo.language ? [repo.language] : []),
           ...((repo.topics && repo.topics.length ? repo.topics : []) as string[]),
@@ -90,4 +90,3 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ items: [] })
   }
 }
-
