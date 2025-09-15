@@ -2,7 +2,7 @@
   "items": [
     {
       "title": "Speaker",
-      "org": "OpenInfra Indonesia Day 2025",
+      "event": "OpenInfra Indonesia Day 2025",
       "orgUrl": "https://2025.openinfra.id/",
       "start": "2025",
       "end": "2025",
@@ -10,11 +10,31 @@
     },
     {
       "title": "Mentor",
-      "org": "Satupadu Mentorship Summit",
+      "event": "Satupadu Mentorship Summit: Kampus Merdeka Chapter 2025",
       "start": "2025",
       "end": "2025",
       "tags": ["Talk", "Sharing"]
+    },
+    {
+        "title": "Mentor",
+        "event": "Elective study Your Journey to the Cloud: Starting with Linux and Building Simple APIs Generation Girl Bali x HIMAIF Udayana",
+        "start": "2024",
+        "end": "2024",
+        "tags": ["Talk", "Sharing"]
+    },
+    {
+        "title": "Speaker",
+        "event": "Sakapuan talks 2024: Speak Yourself",
+        "start": "2024",
+        "end": "2024",
+        "tags": ["Talk", "Sharing"]
+    },
+    {
+        "title": "Speaker",
+        "event": "Udayana Road to Devfest 2023: Developers and Community Highlights with GDGoC Udayana",
+        "start": "2023",
+        "end": "2023",
+        "tags": ["Talk", "Sharing"]
     }
   ]
 }
-
