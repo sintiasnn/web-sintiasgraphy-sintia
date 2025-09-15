@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-	title: "sinsin — Home",
+	title: { absolute: "sinsin — Home" },
 	description:
 		"Personal site of Ni Putu Sintia Wati: photos, projects, and notes.",
 };

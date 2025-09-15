@@ -10,7 +10,10 @@ import Footer from "./footer";
 const fontSans = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "sinsin — Personal Site",
+  title: {
+    default: "sinsin — Home",
+    template: "sinsin — %s",
+  },
   description: "Personal site of Ni Putu Sintia Wati: photos, projects, and notes.",
 };
 

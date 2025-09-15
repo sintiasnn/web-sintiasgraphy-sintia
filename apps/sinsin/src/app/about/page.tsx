@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "#/app/link";
 
 export const metadata: Metadata = {
-	title: "About – sinsin",
+	title: "About",
 	description: "About Sintia Wati",
 };
 
 export default function AboutPage() {
-	const linktreeUrl = process.env.NEXT_PUBLIC_LINKTREE_URL || "/contact";
+	const linktreeUrl =
+		process.env.NEXT_PUBLIC_LINKTREE_URL || "https://linktr.ee/putusintia";
 	const githubUrl =
 		process.env.NEXT_PUBLIC_GITHUB_URL || "https://github.com/sintiasnn";
 	const instagramUrl =
