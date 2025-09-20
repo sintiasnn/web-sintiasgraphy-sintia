@@ -7,6 +7,20 @@ type Photo = { src: string; alt?: string; caption?: string }
 type InstagramResponse = { posts?: string[]; profileName?: string; profileUrl?: string }
 type PhotosResponse = { photos: Photo[]; hero?: string }
 
+function getVariants(src: string) {
+  const base = src.replace(/\.[^.]+$/, '')
+  const ext = (src.match(/\.[^.]+$/)?.[0] ?? '').toLowerCase()
+  return {
+    base,
+    ext,
+    png: src,
+    webp: `${base}.webp`,
+    avif: `${base}.avif`,
+    thumbWebp: `${base}.thumb.webp`,
+    thumbAvif: `${base}.thumb.avif`,
+  }
+}
+
 export default function PhotosPage() {
   const [photos, setPhotos] = useState<Photo[]>([])
   const [activeIndex, setActiveIndex] = useState<number | null>(null)
@@ -104,7 +118,9 @@ export default function PhotosPage() {
                   src={heroSrc}
                   alt={hp?.alt ?? ''}
                   className="block h-auto w-full object-cover md:h-96"
-                  loading="lazy"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
                 />
                 {/* gradient + title overlay */}
                 <span
@@ -140,7 +156,16 @@ export default function PhotosPage() {
                   title={p.caption || p.alt || ''}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={p.src} alt={p.alt ?? ''} className="block h-20 w-auto object-cover" loading="lazy" />
+                  {(() => {
+                    const v = getVariants(p.src)
+                    return (
+                      <picture>
+                        <source srcSet={v.thumbAvif} type="image/avif" />
+                        <source srcSet={v.thumbWebp} type="image/webp" />
+                        <img src={v.png} alt={p.alt ?? ''} className="block h-20 w-auto object-cover" loading="lazy" decoding="async" />
+                      </picture>
+                    )
+                  })()}
                 </button>
               ))}
             </div>
@@ -166,7 +191,16 @@ export default function PhotosPage() {
               ✕
             </button>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={active.src} alt={active.alt ?? ''} className="max-h-[90vh] max-w-[90vw] rounded shadow-2xl" />
+            {(() => {
+              const v = getVariants(active.src)
+              return (
+                <picture>
+                  <source srcSet={v.avif} type="image/avif" />
+                  <source srcSet={v.webp} type="image/webp" />
+                  <img src={v.png} alt={active.alt ?? ''} className="max-h-[90vh] max-w-[90vw] rounded shadow-2xl" decoding="async" />
+                </picture>
+              )
+            })()}
             <div className="absolute inset-x-0 bottom-2 mx-auto w-full max-w-[90vw] text-center">
               {(active.caption || active.alt) && (
                 <div className="mx-auto inline-block rounded bg-black/60 px-3 py-1 text-sm text-white backdrop-blur">
