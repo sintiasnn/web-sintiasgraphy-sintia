@@ -68,4 +68,29 @@ WORKDIR /srv
 
 COPY --from=builder /srv/apps/sinsin/.next/standalone .
 COPY --from=builder /srv/apps/sinsin/.next/static ./apps/sinsin/.next/static
-COPY --from=builder /srv/apps
+COPY --from=builder /srv/apps/sinsin/public ./apps/sinsin/public
+COPY --from=skeleton /srv/apps/sinsin/next.config.mjs ./apps/sinsin/next.config.mjs
+
+RUN chmod -R 0775 ./apps/sinsin/public \
+ && if [ -f ./server.js ]; then chmod +x ./server.js; fi
+
+# ----------------------------------------------------------------------
+# Runner stage (distroless)
+# ----------------------------------------------------------------------
+FROM --platform=${PLATFORM} gcr.io/distroless/nodejs${NODE_VERSION}-debian12
+
+ARG NODE_ENV=production HOSTNAME=0.0.0.0 PORT=3001
+ENV NODE_ENV=$NODE_ENV HOSTNAME=$HOSTNAME PORT=$PORT
+ENV TINI_SUBREAPER=true NEXT_TELEMETRY_DISABLED=1
+
+WORKDIR /srv
+USER nonroot:nonroot
+
+COPY --from=pruner --chown=nonroot:nonroot /srv /srv
+COPY --from=base /usr/bin/tini /usr/bin/tini
+COPY --from=glibc /usr/bin/env /usr/bin/env
+COPY --from=glibc /bin/sh /bin/sh
+
+EXPOSE $PORT
+ENTRYPOINT ["/usr/bin/tini", "--"]
+CMD ["/nodejs/bin/node", "server.js"]
