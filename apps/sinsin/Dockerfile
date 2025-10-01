@@ -26,7 +26,7 @@ RUN curl -fsSL https://moonrepo.dev/install/moon.sh | bash
 # Scaffold the specific project.
 # -----------------------------------------------------------------------------
 FROM base AS skeleton
-COPY --link . .
+COPY --link ../../ .
 RUN moon docker scaffold sinsin
 
 # -----------------------------------------------------------------------------
