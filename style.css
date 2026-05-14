@@ -58,8 +58,27 @@ body {
     padding: 30px;
 }
 
-.hero>* {
-    display: none;
+.hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero .heading {
+    font-family: var(--font-heading);
+    font-size: 2.5em;
+    color: var(--color-light);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+}
+
+.hero .sub-heading {
+    font-size: 1em;
+    color: var(--color-light);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    font-weight: 200;
 }
 
 .features {
@@ -430,21 +449,6 @@ footer {
 }
 
 @media (max-width: 1024px) {
-    .hero>* {
-        display: block;
-        background-color: var(--color-dark);
-        color: var(--color-light);
-        padding: 5px;
-    }
-
-    .hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-
     .about {
         flex-direction: column;
         text-align: center;
