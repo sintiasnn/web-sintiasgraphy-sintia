@@ -22,7 +22,7 @@ img {
 
 body {
     background-color: var(--color-bg);
-    font-size: 24px;
+    font-size: 18px;
     font-family: var(--font-family);
     margin: 50px;
 }
@@ -239,16 +239,10 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.abouts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-}
-
 .abouts h2 {
-    grid-column: 1 / -1;
     text-align: center;
-    margin-bottom: 20px;
     margin-top: 50px;
+    margin-bottom: 20px;
 }
 
 .about {
@@ -259,7 +253,6 @@ body {
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     margin-bottom: 20px;
-    margin-top: 50px;
 }
 
 .about img {
