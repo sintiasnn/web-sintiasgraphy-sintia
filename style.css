@@ -524,6 +524,16 @@ footer {
     .hero {
         min-height: 250px;
         padding: 20px;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .hero .heading {
+        font-size: 1.8em;
+    }
+
+    .hero .sub-heading {
+        font-size: 0.85em;
     }
 
     .about {
