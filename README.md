@@ -105,7 +105,7 @@ npm run build
 
 ---
 
-## Original Submission
+## Original Branch
 The first branch is preserved in the [`main-old-version`](https://github.com/sintiasnn/web-sintiasgraphy-sintia/tree/main-old-version) branch.
 
 ---
