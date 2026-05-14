@@ -6,8 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="sintiasgraphy - All about Sintia's simple snaps. Photography portfolio and personal website.">
-    <title>sintiasgraphy | Landing Web</title>
+    <title>sintiasgraphy | Photography</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -33,10 +36,10 @@
                 <h1>sintiasgraphy</h1>
             </div>
             <ul class="menu-list">
-                <li><a href="#home">HOME</a></li>
-                <li><a href="#scope">SCOPE</a></li>
-                <li><a href="#portfolio">PORTFOLIO</a></li>
-                <li><a href="#contact">CONTACT</a></li>
+                <li><a href="#home" class="nav-link">HOME</a></li>
+                <li><a href="#scope" class="nav-link">SCOPE</a></li>
+                <li><a href="#portfolio" class="nav-link">PORTFOLIO</a></li>
+                <li><a href="#contact" class="nav-link">CONTACT</a></li>
             </ul>
             <div class="menu-toggle">
                 <input type="checkbox" aria-label="Toggle navigation menu">
@@ -45,8 +48,9 @@
                 <span></span>
             </div>
         </nav>
+
         <main>
-            <article id="scope" class="services">
+            <article id="scope" class="services fade-in">
                 <h2>Scope</h2>
                 <div class="service">
                     <div class="icon">📸</div>
@@ -64,28 +68,40 @@
                     <p>Mostly shot with a smartphone and occasionally a DSLR. I believe the best camera is the one you have with you. Post-processing is kept minimal to preserve the authentic feel of each capture.</p>
                 </div>
             </article>
-            <article id="portfolio" class="galeri">
+
+            <article id="portfolio" class="galeri fade-in">
                 <h2>Portfolio</h2>
-                <img src="img/picture-1.png" alt="Sintiasgraphy photo 1" loading="lazy">
-                <img src="img/picture-2.png" alt="Sintiasgraphy photo 2" loading="lazy">
-                <img src="img/picture-3.png" alt="Sintiasgraphy photo 3" loading="lazy">
-                <img src="img/picture-4.png" alt="Sintiasgraphy photo 4" loading="lazy">
-                <img src="img/picture-5.png" alt="Sintiasgraphy photo 5" loading="lazy">
-                <img src="img/picture-6.png" alt="Sintiasgraphy photo 6" loading="lazy">
-                <img src="img/picture-7.png" alt="Sintiasgraphy photo 7" loading="lazy">
-                <img src="img/picture-8.png" alt="Sintiasgraphy photo 8" loading="lazy">
-                <img src="img/picture-9.png" alt="Sintiasgraphy photo 9" loading="lazy">
-                <img src="img/picture-10.png" alt="Sintiasgraphy photo 10" loading="lazy">
+                <img src="img/picture-1.png" alt="Sintiasgraphy photo 1" loading="lazy" class="gallery-img">
+                <img src="img/picture-2.png" alt="Sintiasgraphy photo 2" loading="lazy" class="gallery-img">
+                <img src="img/picture-3.png" alt="Sintiasgraphy photo 3" loading="lazy" class="gallery-img">
+                <img src="img/picture-4.png" alt="Sintiasgraphy photo 4" loading="lazy" class="gallery-img">
+                <img src="img/picture-5.png" alt="Sintiasgraphy photo 5" loading="lazy" class="gallery-img">
+                <img src="img/picture-6.png" alt="Sintiasgraphy photo 6" loading="lazy" class="gallery-img">
+                <img src="img/picture-7.png" alt="Sintiasgraphy photo 7" loading="lazy" class="gallery-img">
+                <img src="img/picture-8.png" alt="Sintiasgraphy photo 8" loading="lazy" class="gallery-img">
+                <img src="img/picture-9.png" alt="Sintiasgraphy photo 9" loading="lazy" class="gallery-img">
+                <img src="img/picture-10.png" alt="Sintiasgraphy photo 10" loading="lazy" class="gallery-img">
             </article>
-            <article class="contacts" id="contact">
+
+            <article id="contact" class="contacts fade-in">
                 <h2>Contact</h2>
-                <div class="service">
-                    <div class="icon">📞</div>
-                    <p>Have questions or want to collaborate? Feel free to reach out via email or social media. I'm always open to discussing photography, projects, or just sharing ideas.</p>
+                <div class="contact-content">
+                    <p>Let's connect! Follow my photography journey on Instagram or send me an email.</p>
+                    <div class="contact-links">
+                        <a href="https://instagram.com/sintiasgraphy" target="_blank" rel="noopener noreferrer" class="contact-link">
+                            <span class="contact-icon">📷</span>
+                            @sintiasgraphy
+                        </a>
+                        <a href="mailto:sintiasgraphy@gmail.com" class="contact-link">
+                            <span class="contact-icon">✉️</span>
+                            sintiasgraphy@gmail.com
+                        </a>
+                    </div>
                 </div>
             </article>
         </main>
-        <aside class="abouts">
+
+        <aside class="abouts fade-in">
             <h2>About writer</h2>
             <div class="about">
                 <img src="img/profile-picture.png" alt="Profile picture of Sintia">
@@ -98,8 +114,17 @@
                 </p>
             </div>
         </aside>
-        <footer>Belajar Dasar Pemrograman Web &copy; 2021, Dicoding Academy</footer>
+
+        <footer>&copy; 2024 sintiasgraphy. All rights reserved.</footer>
     </div>
+
+    <div id="lightbox" class="lightbox" role="dialog" aria-label="Image viewer">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <img class="lightbox-image" alt="Enlarged view">
+    </div>
+
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">&uarr;</button>
+
     <script type="module" src="script.js"></script>
 </body>
 
