@@ -105,6 +105,11 @@ npm run build
 
 ---
 
+## Original Submission
+The original Dicoding "Belajar Dasar Pemrograman Web" submission is preserved in the [`main-old-version`](https://github.com/sintiasnn/web-sintiasgraphy-sintia/tree/main-old-version) branch.
+
+---
+
 ## Author
 **Ni Putu Sintia Wati**
 - GitHub: [@sintiasnn](https://github.com/sintiasnn)
